@@ -1,0 +1,12 @@
+extends master.pug
+block content
+    h1(class="text-center") Connexion
+    form(action="", method="post" class="col-md-offset-2 col-md-8")
+        div(class="form-group")
+            label(for="email") Email
+            input(type="email",class="form-control", name="email", id="email",placeholder="email")
+        div(class="form-group")
+            label(for="password") Password
+            input(type="text",class="form-control", name="password", id="password", placeholder="password")
+
+        button(type="submit" class="green btn col-md-offset-2 col-md-8") Valider

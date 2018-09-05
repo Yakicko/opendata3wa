@@ -1,0 +1,77 @@
+------------------- ETAPE -----------------------
+
+1 - Dans le dossier du projet on fait un : 
+    -> npm init permet la creation du package.json
+        --> package name correspond au nom du projet
+
+2 - git init :
+    -> creation du fichier .gitignore et mettre dedans :
+        --> node_modules pour ne pas télécharger le node_modules car c'est gros
+            .vscode : les préférences de visual studio
+
+3 - npm i express --save : installation du framework express
+
+4 - npm i nodemon --save-dev : permet que lorsqu'on fait un ctrl+S pour sauvegarder le fichier le serveur se mette a jour
+
+5 - touch [nomdufichier] : permet de creer un fichier
+( pour creer un dossier : mkdir[nomdudossier])
+
+6 - creation d'un alias dans script :
+    -> le nom du script est start on fait ca pour que ca lance notre nodemon car on peut avoir des soucis car si on ne fait pas ca il le cherche dans le node module globale mais grace a ca il va le chercher directement dans les dépendances dans le package.json
+    -> faire la commande npm start pour mettre en place le serveur
+
+7 - installation d'un moteur de templace : http://expressjs.com/fr/guide/using-template-engines.html
+    -> npm install pug --save (pug es tun moteur de template on aurait pu utiliser un autre)
+    -> documentation de pug : https://pugjs.org/api/getting-started.html
+    -> creation d'un dossier view dans lequel je met un fichier index.pug
+
+8 - creation d'un dossier public pour mettre notre js et notre css (de plus on creait les dossiers)
+    -> mettre en place les fichiers statics grace a la doc : http://expressjs.com/fr/starter/static-files.html (voir index.js)
+    -> css/style.css mettre le css
+9 - creation du fichier master.pug pour contenir mon html basique puis grace a un extend de ce fichier on pourra changer le contenu
+
+10 - si on est tjr sur git on fait :
+    -> git add -A
+    -> git status
+    -> gitcommit -m "[legendeDeNotreCommit]"
+
+11 - creation d'un fichier contenant nos routes :
+    -> app/routes.js et on creera nos routes dedans
+
+12 - npm i body-parser --save package pour récupérer les données du formulaire 
+
+13 - creation bdd plus le nom d'utilisateur a savoir retenir les informations car on doit les récupérer 
+
+14 - npm i mongoose --save
+    -> connection a notre base de donné mongolab ( creation tout d'abord de la bdd puis regarder index.js pour voir )
+
+15 - npm i dotenv --save : permet de lire dans un projet node un fichier qui s'appelle .env
+    -> on y stockera les informations sensibles tels que les mots de passe
+    -> mettre dans le .gitignore le .env
+    -> ensuite pour utiliser faire un require et .config permet de définir les variables d'environnements
+    -> puis voir les appelles des variables dans le index.js
+
+16 - 
+
+17 - 
+
+18 - 
+
+19 - 
+
+20 - 
+
+21 - 
+
+22 - 
+
+23 - 
+
+24 - 
+
+25 - 
+26 - 
+27 - 
+28 - 
+29 - 
+30 - 

@@ -1,0 +1,30 @@
+extends master.pug
+block content
+
+    h1(class="text-center") Inscription
+     //- Gestion des erreurs si existantes
+    if errors
+        div.alert.alert-danger
+            each error, index in errors
+                | #{error} <br>
+    //- =================================
+    form(action="/register", method="post" class="col-md-offset-2 col-md-8")
+        div(class="form-group")
+            label(for="lastname") Nom
+            input(type="text", name="lastname", class="form-control",id="lastname", placeholder="nom" value=(user && user.lastname))
+
+        div(class="form-group")
+            label(for="firstname") Prenom
+            input(type="text", name="firstname", class="form-control",id="firstname", placeholder="prenom" value=(user && user.firstname))
+
+        div(class="form-group")
+            label(for="email") Email
+            input(type="email", name="email", class="form-control",id="email",placeholder="email" value=(user && user.email))
+
+        div(class="form-group")
+            label(for="password") Password
+            input(type="text", name="pass", id="pass", class="form-control",placeholder="password")
+            br
+            input(type="text", name="pass_confirmation", id="pass_confirmation", class="form-control",placeholder="password")
+
+        button(type="submit" class="green btn col-md-offset-2 col-md-8") Valider

@@ -1,0 +1,21 @@
+.navbar{
+    background-color : rgb(1, 31, 21) ;
+    border-color : rgb(1, 31, 21) ;
+}
+
+.navbar ul li a{
+    color : white ;
+    font-size: 30px ;
+}
+.navbar ul li a img{
+    width : 40px ;
+}
+.navbar ul li a:hover{
+    background-color: rgb(1, 31, 21) ;
+}
+
+.green{
+    background: rgb(1, 31, 21) ;
+    color : white ;
+}
+
