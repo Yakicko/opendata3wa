@@ -1,6 +1,11 @@
 const User = require("./models/User.model");
 
-module.exports = function(app){
+module.exports = function(app, passport){
+    app.use((req, res, next) => {
+        app.locals.user = req.user // Récupération de l'objet 'user' (sera existant si une session est ouverte, et undefined dans le cas contraire)
+        next()
+    })
+
     // creation d'une route en get pour afficher Hello World :*
     app.get('/', function(req,res){
         // si on ne met pas la ligne res.setHeader le framework express mettre en place directement en Header cohérent avec ce qu'on envoie
@@ -14,6 +19,14 @@ module.exports = function(app){
     app.get('/login', function(req,res){
         res.render("login");
     })
+
+    app.post('/login', passport.authenticate('local', {
+        successRedirect: '/',
+        failureRedirect: '/login',
+        badRequestMessage: 'Identifiants nons valides!',
+        failureFlash: true,
+        successFlash: { message: 'Connexion réussie. Bienvenue !' }
+    }));
 
     app.get('/register', function(req,res){
         res.render("register");

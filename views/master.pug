@@ -14,10 +14,15 @@ html(lang="en")
                 li
                     a(href="/")
                         img(src="../image/icon_fox.png", alt="")
-                li
-                    a(href="login") Connexion
-                li
-                    a(href="register") Register
+
+                if user
+                    li
+                        | Vous êtes connecté en tant que #{user.firstname} #{user.lastname}
+                else 
+                    li
+                        a(href="login") Connexion
+                    li
+                        a(href="register") Register
         
         each messages, kind in flashMessages
             div(class="alert alert-"+kind+" alert-flash")

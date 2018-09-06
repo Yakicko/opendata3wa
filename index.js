@@ -15,6 +15,8 @@ const session = require('express-session');
 
 const flash = require("connect-flash");
 
+const passport = require('passport');
+
 // indique a express que le moteur de templating a utiliser est pug
 app.set("view engine","pug");
 
@@ -45,11 +47,15 @@ app.use((req,res,next) => {
     next();
 });
 
+app.use(passport.initialize());
+app.use(passport.session());
+
 /**
  * Routes de l'application
  */
 
-require("./app/routes")(app);
+require("./app/passport")(passport);
+require('./app/routes')(app, passport);
 
 /**
  * Connexion à la base de données et démarrage de l'app

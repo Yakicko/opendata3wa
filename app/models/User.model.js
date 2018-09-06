@@ -19,8 +19,9 @@ var userSchema = new Schema({
             message: 'L\'adresse email {VALUE} n\'est pas une adresse RFC valide.'
         }
     },
-    hash:       {type:String,required:true},
-    salt:       {type:String,required:true},
+    hash:       {type:String},
+    salt:       {type:String},
+    githubId:   {type:String}
 });
 
 userSchema.statics.register = function(firstname, lastname, email, pass, pass_confirmation){
@@ -65,5 +66,18 @@ userSchema.statics.register = function(firstname, lastname, email, pass, pass_co
     })
     
 };
+
+userSchema.statics.verifyPass= function(passwordInClear, userObject){
+    const userSalt = userObject.salt;
+    const userHash = userObject.hash;
+    
+    return hash(passwordInClear,userSalt).then((data)=>{
+        if (data.hash === userHash) {
+        	return Promise.resolve(userObject)
+        } else {
+        	return Promise.reject(new Error('Mot de passe invalide!'))
+        }
+    });
+}
 
 module.exports = mongoose.model("User",userSchema);
