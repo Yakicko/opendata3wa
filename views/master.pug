@@ -18,6 +18,12 @@ html(lang="en")
                     a(href="login") Connexion
                 li
                     a(href="register") Register
+        
+        each messages, kind in flashMessages
+            <div class="alert alert-#{kind} alert-flash">
+                each message in messages
+                    | #{message}
+            </div>
                             
         div(class="container")
             div(class="element")

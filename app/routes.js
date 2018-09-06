@@ -27,10 +27,12 @@ module.exports = function(app){
             req.body.pass,
             req.body.pass_confirmation
         ).then(()=>{
-            res.redirect("/?register=ok")
+            req.flash("success", "vous etes bien inscrit. Vous pouvez maintenant vous connectez.");
+            res.redirect("/") // redirection page d'accueil
         }).catch(errors => {
             res.render('register', { errors, user: req.body })
         });
         console.log(req.body);
     })
+    
 }
