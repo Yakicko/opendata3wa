@@ -27,15 +27,19 @@ app.set("views","./views");
 
 // permet d'utiliser les fichiers static se trouvant dans le dossier public 
 app.use(express.static('public'));
+
 // grace a ca tous les éléments auront les méthodes body qui contiendra nos datas ca sera l'équivalent de $_POST
 app.use(bodyParser.urlencoded({extended:false}));
+
 app.use(session({
     secret: 'opendata3wa rocks',
     resave: false,
     saveUninitialized: true,
     cookie: { secure: false }
 }))
+
 app.use(flash());
+
 app.use((req,res,next) => {
     app.locals.flashMessages = req.flash();
     next();
