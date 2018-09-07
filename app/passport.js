@@ -40,4 +40,20 @@ module.exports = function(passport) {
                     done(null, false, {message: err.message});
             });
     }));
+
+    passport.use(new GithubStrategy({
+    	clientID: process.env.GITHUB_CLIENT_ID,
+        clientSecret: process.env.GITHUB_CLIENT_SECRET,
+        callbackURL: `http://${process.env.SERVER_NAME}:${process.env.SERVER_PORT}/auth/github/callback`
+    },
+        function(token, tokenSecret, profile, cb) {
+        	
+            console.log('PROFILE GITHUB', profile)
+            User.signupViaGithub(profile)
+                .then(user => cb(null, user))
+                .catch(err => cb(err, false));
+            
+        }
+    ));
+
 }

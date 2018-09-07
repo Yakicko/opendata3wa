@@ -18,9 +18,13 @@ html(lang="en")
                 if user
                     li
                         | Vous êtes connecté en tant que #{user.firstname} #{user.lastname}
+                    li
+                        a(href="logout") Deconnexion
                 else 
                     li
                         a(href="login") Connexion
+                    li
+                        a(href="/auth/github") Github
                     li
                         a(href="register") Register
         

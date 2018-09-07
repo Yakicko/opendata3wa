@@ -9,7 +9,7 @@ var userSchema = new Schema({
     lastname:   {type:String,required:[true, 'Le champs "nom" est obligatoire']},
     email : {
         type: String,
-        required: [true, 'Le champs "email" est obligatoire'],
+        //required: [true, 'Le champs "email" est obligatoire'],
         validate: {
             validator: function(mailValue) {
                 // c.f. http://emailregex.com/
@@ -21,7 +21,8 @@ var userSchema = new Schema({
     },
     hash:       {type:String},
     salt:       {type:String},
-    githubId:   {type:String}
+    githubId:   {type:String},
+    avatarUrl:  {type:String}
 });
 
 userSchema.statics.register = function(firstname, lastname, email, pass, pass_confirmation){
@@ -78,6 +79,26 @@ userSchema.statics.verifyPass= function(passwordInClear, userObject){
         	return Promise.reject(new Error('Mot de passe invalide!'))
         }
     });
+}
+
+userSchema.statics.signupViaGithub = function(profile) {
+
+    // Recherche si cet utilisateur (loggué via Github) n'est pas déjà dans notre base mongo ?
+    return this.findOne({ 'githubId' : profile.id })
+        .then(user => {
+            // Non ! Donc on l'inscrit dans notre base..
+            if (user === null) {
+                const [firstname, lastname] = profile.displayName.split(' ');
+                return this.create({
+                    githubId : profile.id,
+                    firstname : firstname || '',
+                    lastname : lastname || '',
+                    avatarUrl : profile.photos[0].value // Photo par défaut de l'user Github
+                });
+            }
+            // On renvoie l'utilisateur final
+            return user;
+        });
 }
 
 module.exports = mongoose.model("User",userSchema);
